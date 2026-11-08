@@ -83,21 +83,21 @@ export function Dashboard({
   return (
     <div className="max-w-6xl mx-auto px-4 py-8 space-y-8 animate-fadeIn">
       {/* Top Banner */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 bg-gradient-to-r from-navy-900 to-navy-800 text-white p-6 sm:p-8 rounded-2xl shadow-xl">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 bg-slate-900 border border-slate-800 text-white p-6 sm:p-8 rounded-2xl shadow-xl">
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-teal-500/20 text-teal-300 border border-teal-500/30">
-            <ShieldCheck className="w-3.5 h-3.5" />
+            <ShieldCheck className="w-3.5 h-3.5 text-teal-400" />
             <span>Authenticated Tenant Portal</span>
-            <span className="text-navy-300">|</span>
+            <span className="text-slate-500">|</span>
             <span className="flex items-center gap-1">
-              <Database className="w-3 h-3" />
+              <Database className="w-3 h-3 text-teal-400" />
               {isSupabaseConfigured ? 'Supabase Cloud Sync' : 'Local Encrypted Session'}
             </span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
             Welcome back, {user.displayName || user.email.split('@')[0]}
           </h1>
-          <p className="text-sm text-navy-200 max-w-xl">
+          <p className="text-sm text-slate-200 max-w-xl leading-relaxed">
             Manage your active security deposit disputes, review AI photographic evidence, inspect landlord policy comparisons, and download evidence dispute packages.
           </p>
         </div>
@@ -105,9 +105,9 @@ export function Dashboard({
         <div className="flex flex-wrap items-center gap-3">
           <button
             onClick={onStartNewDispute}
-            className="flex items-center gap-2 px-5 py-3 bg-teal-500 hover:bg-teal-400 text-navy-950 font-semibold rounded-xl shadow-lg transition-all hover:scale-[1.02]"
+            className="flex items-center gap-2 px-5 py-3 bg-teal-400 hover:bg-teal-300 text-slate-950 font-bold rounded-xl shadow-lg transition-all hover:scale-[1.02]"
           >
-            <PlusCircle className="w-4 h-4" />
+            <PlusCircle className="w-4 h-4 text-slate-950" />
             <span>Start New Dispute</span>
           </button>
         </div>
@@ -185,7 +185,7 @@ export function Dashboard({
             <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
               <button
                 onClick={onStartNewDispute}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-navy-900 text-white rounded-lg text-xs font-semibold hover:bg-navy-800 transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-lg text-xs font-semibold hover:bg-slate-800 transition-colors"
               >
                 <PlusCircle className="w-3.5 h-3.5" />
                 <span>Start New Dispute</span>

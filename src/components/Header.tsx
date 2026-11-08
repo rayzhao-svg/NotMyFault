@@ -32,7 +32,7 @@ export const Header: React.FC<HeaderProps> = ({
           className="flex items-center gap-3 cursor-pointer"
           onClick={() => onNavigateView('home')}
         >
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-navy-950 via-navy-900 to-teal-800 text-white shadow-sm ring-1 ring-navy-950/10">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-900 text-white shadow-sm ring-1 ring-slate-800">
             <Scale className="h-5 w-5 text-teal-400" />
           </div>
           <div>
@@ -44,7 +44,7 @@ export const Header: React.FC<HeaderProps> = ({
                 Deposit Defense
               </span>
             </div>
-            <p className="text-xs text-slate-500 font-medium hidden sm:block">
+            <p className="text-xs text-slate-600 font-medium hidden sm:block">
               Don&apos;t pay for damage you didn&apos;t cause.
             </p>
           </div>
@@ -73,7 +73,7 @@ export const Header: React.FC<HeaderProps> = ({
                 onClick={() => onNavigateView(currentView === 'dashboard' ? 'home' : 'dashboard')}
                 className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs sm:text-sm font-semibold transition-colors ${
                   currentView === 'dashboard'
-                    ? 'bg-navy-900 text-white'
+                    ? 'bg-slate-900 text-white'
                     : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                 }`}
               >
@@ -108,9 +108,9 @@ export const Header: React.FC<HeaderProps> = ({
               onNavigateView('home');
               onScrollToUpload();
             }}
-            className="flex items-center gap-1.5 rounded-lg bg-navy-950 px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-white shadow hover:bg-navy-900 transition-colors"
+            className="flex items-center gap-1.5 rounded-lg bg-teal-600 hover:bg-teal-700 px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-white shadow transition-colors"
           >
-            <ShieldCheck className="h-4 w-4 text-teal-400" />
+            <ShieldCheck className="h-4 w-4 text-teal-200" />
             <span>New Dispute</span>
           </button>
         </div>

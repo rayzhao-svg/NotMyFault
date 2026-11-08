@@ -8,8 +8,14 @@
 }
 
 body {
-  color: var(--foreground);
+  color: #0f172a;
   background: var(--background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+input, textarea, select {
+  color: #0f172a;
 }
 
 @media print {

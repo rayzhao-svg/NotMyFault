@@ -25,7 +25,7 @@ export const PrintableReport: React.FC<PrintableReportProps> = ({ result, onClos
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-navy-950/80 backdrop-blur-sm p-4 sm:p-6 lg:p-8 flex justify-center">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-sm p-4 sm:p-6 lg:p-8 flex justify-center">
       {/* Container - Printable Card */}
       <div className="relative w-full max-w-5xl bg-white rounded-2xl shadow-2xl overflow-hidden print:m-0 print:p-0 print:shadow-none print:w-full print:max-w-none">
         {/* Screen-only top action bar */}

@@ -111,7 +111,7 @@ export const ResultsDashboard: React.FC<ResultsDashboardProps> = ({
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold shadow-sm transition-all ${
               isCaseSaved
                 ? 'bg-emerald-50 text-emerald-800 border border-emerald-300 cursor-default'
-                : 'bg-navy-950 text-white hover:bg-navy-900 shadow-md hover:scale-[1.02]'
+                : 'bg-slate-900 text-white hover:bg-slate-800 shadow-md hover:scale-[1.02]'
             }`}
           >
             {isCaseSaved ? (
@@ -272,7 +272,7 @@ export const ResultsDashboard: React.FC<ResultsDashboardProps> = ({
                   >
                     <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                       <div className="flex items-start gap-3">
-                        <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-navy-950 text-white text-xs font-bold flex-shrink-0 mt-0.5">
+                        <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-900 text-white text-xs font-bold flex-shrink-0 mt-0.5">
                           #{idx + 1}
                         </span>
                         <div>

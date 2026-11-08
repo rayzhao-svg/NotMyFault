@@ -310,7 +310,7 @@ export const UploadSection: React.FC<UploadSectionProps> = ({
           <div>
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-navy-950 text-white text-xs font-bold">
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-slate-900 text-white text-xs font-bold">
                   1
                 </span>
                 Move-In & Move-Out Photo Evidence
@@ -398,7 +398,7 @@ export const UploadSection: React.FC<UploadSectionProps> = ({
                     type="date"
                     value={moveInDate}
                     onChange={(e) => setMoveInDate(e.target.value)}
-                    className="text-xs rounded-md border-slate-300 py-1 px-2 border focus:ring-1 focus:ring-teal-500 focus:outline-none"
+                    className="text-xs rounded-md border border-slate-300 bg-white text-slate-900 py-1.5 px-2.5 focus:ring-1 focus:ring-teal-500 focus:outline-none font-medium"
                   />
                 </div>
               </div>
@@ -482,7 +482,7 @@ export const UploadSection: React.FC<UploadSectionProps> = ({
                     type="date"
                     value={moveOutDate}
                     onChange={(e) => setMoveOutDate(e.target.value)}
-                    className="text-xs rounded-md border-slate-300 py-1 px-2 border focus:ring-1 focus:ring-teal-500 focus:outline-none"
+                    className="text-xs rounded-md border border-slate-300 bg-white text-slate-900 py-1.5 px-2.5 focus:ring-1 focus:ring-teal-500 focus:outline-none font-medium"
                   />
                 </div>
               </div>
@@ -494,7 +494,7 @@ export const UploadSection: React.FC<UploadSectionProps> = ({
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h3 className="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-navy-950 text-white text-xs font-bold">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-slate-900 text-white text-xs font-bold">
                     2
                   </span>
                   Itemized Landlord Deductions
@@ -595,7 +595,7 @@ export const UploadSection: React.FC<UploadSectionProps> = ({
           <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-5 space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-navy-950 text-white text-[10px] font-bold">
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-slate-900 text-white text-[10px] font-bold">
                   3
                 </span>
                 Property Management & Jurisdiction Research Profile
@@ -750,7 +750,7 @@ export const UploadSection: React.FC<UploadSectionProps> = ({
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-navy-950 hover:bg-navy-900 disabled:bg-slate-400 px-7 py-3 text-sm font-semibold text-white shadow-md hover:shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-navy-950 focus:ring-offset-2 cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 hover:bg-slate-800 disabled:bg-slate-400 px-7 py-3 text-sm font-bold text-white shadow-md hover:shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 cursor-pointer"
               >
                 {isLoading ? (
                   <>

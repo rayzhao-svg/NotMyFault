@@ -105,6 +105,10 @@ function fakeTimers() {
   console.log('PASS deadline resolves/rejects normally, cancels hanging work, and always clears timers.');
 
   const services = harness();
+  const modelConfig = services.load('src/lib/geminiConfig.ts');
+  assert.equal(modelConfig.DEFAULT_GEMINI_MODEL, 'gemini-3.5-flash-lite');
+  assert.equal(modelConfig.getGeminiThinkingConfig('gemini-3.8-flash').thinkingLevel, 'LOW');
+  assert.equal(modelConfig.getGeminiThinkingConfig('custom-model'), undefined);
   const controller = new AbortController();
   await services.load('src/lib/gemini.ts').analyzeEvidenceWithGemini(photoPayload, controller.signal);
   await services.load('src/lib/research.ts').researchPolicyAndPricing(researchPayload, controller.signal);
@@ -113,7 +117,8 @@ function fakeTimers() {
     assert.equal(request.config.abortSignal, controller.signal);
     assert.equal(request.config.httpOptions.timeout, 150_000);
     assert.equal(request.config.httpOptions.retryOptions.attempts, 3);
-    assert.equal(request.config.thinkingConfig.thinkingLevel, 'LOW');
+    assert.equal(request.model, 'gemini-3.5-flash-lite');
+    assert.equal(request.config.thinkingConfig, undefined);
     assert.equal(request.config.responseMimeType, 'application/json');
   }
   console.log('PASS both real services pass the deadline signal and bounded SDK retries and timeout.');

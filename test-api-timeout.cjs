@@ -38,7 +38,7 @@ function harness(options = {}) {
     const module = { exports: {} };
     modules.set(filename, module);
     const localRequire = (name) => {
-      if (name === '@google/genai') return { GoogleGenAI };
+      if (name === '@google/genai') return { GoogleGenAI, ThinkingLevel: { LOW: 'LOW' } };
       if (name === 'next/server') return { NextResponse: { json: (body, init) => Response.json(body, init) } };
       assert.ok(name.startsWith('.'), `External dependency blocked: ${name}`);
       const dependency = path.resolve(path.dirname(filename), `${name}.ts`);
@@ -113,6 +113,7 @@ function fakeTimers() {
     assert.equal(request.config.abortSignal, controller.signal);
     assert.equal(request.config.httpOptions.timeout, 150_000);
     assert.equal(request.config.httpOptions.retryOptions.attempts, 3);
+    assert.equal(request.config.thinkingConfig.thinkingLevel, 'LOW');
     assert.equal(request.config.responseMimeType, 'application/json');
   }
   console.log('PASS both real services pass the deadline signal and bounded SDK retries and timeout.');

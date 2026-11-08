@@ -1,5 +1,5 @@
 import { GoogleGenAI } from '@google/genai';
-import { getGeminiModel } from './geminiConfig';
+import { getGeminiModel, getGeminiThinkingConfig } from './geminiConfig';
 import { GEMINI_TIMEOUT_MS } from './geminiDeadline';
 import {
   AnalysisResult,
@@ -192,6 +192,7 @@ Evaluate the evidence thoroughly and output valid JSON.`;
       ],
       config: {
         responseMimeType: 'application/json',
+        thinkingConfig: getGeminiThinkingConfig(modelName),
         abortSignal,
         httpOptions: {
           timeout: GEMINI_TIMEOUT_MS,

@@ -1,5 +1,5 @@
 import { GoogleGenAI } from '@google/genai';
-import { getGeminiModel } from './geminiConfig';
+import { getGeminiModel, getGeminiThinkingConfig } from './geminiConfig';
 import { GEMINI_TIMEOUT_MS } from './geminiDeadline';
 import {
   LandlordDeduction,
@@ -128,6 +128,7 @@ Output strictly valid JSON according to schema.`;
       ],
       config: {
         responseMimeType: 'application/json',
+        thinkingConfig: getGeminiThinkingConfig(modelName),
         abortSignal,
         httpOptions: {
           timeout: GEMINI_TIMEOUT_MS,

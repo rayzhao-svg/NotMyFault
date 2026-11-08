@@ -20,6 +20,7 @@ import {
 } from '../types/deposit';
 import { getSampleAnalysisResult } from '../lib/sampleData';
 import { getCurrentUser, signOutUser, saveDisputeCase } from '../lib/supabase';
+import { prepareAnalysisImage, serializeApiRequest } from '../lib/uploadImages';
 import { RefreshCw, Scale } from 'lucide-react';
 
 export default function Home() {
@@ -80,18 +81,34 @@ export default function Home() {
     setIsCaseSaved(false);
 
     try {
+      // Resize transport copies; keep the original photos for previews and reports.
+      const [moveIn, moveOut] = await Promise.all([
+        prepareAnalysisImage(payload.moveInBase64, payload.moveInMimeType),
+        prepareAnalysisImage(payload.moveOutBase64, payload.moveOutMimeType),
+      ]);
+      const photoBody = serializeApiRequest({
+        moveInBase64: moveIn.dataUrl,
+        moveInMimeType: moveIn.mimeType,
+        moveOutBase64: moveOut.dataUrl,
+        moveOutMimeType: moveOut.mimeType,
+        deductions: payload.deductions,
+        metadata: payload.metadata,
+      });
+      const researchBody = payload.runResearch
+        ? serializeApiRequest({
+            managementCompany: payload.metadata.landlordName || 'Property Management',
+            city: payload.metadata.city || 'Austin',
+            state: payload.metadata.state || 'TX',
+            deductions: payload.deductions,
+            leaseExcerpt: payload.leaseTextExcerpt,
+          })
+        : undefined;
+
       // 1. Analyze photos with Gemini vision
       const photoPromise = fetch('/api/analyze', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          moveInBase64: payload.moveInBase64,
-          moveInMimeType: payload.moveInMimeType,
-          moveOutBase64: payload.moveOutBase64,
-          moveOutMimeType: payload.moveOutMimeType,
-          deductions: payload.deductions,
-          metadata: payload.metadata,
-        }),
+        body: photoBody,
       });
 
       // 2. Concurrently run policy & pricing research if requested
@@ -99,13 +116,7 @@ export default function Home() {
         ? fetch('/api/research', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              companyName: payload.metadata.landlordName || 'Property Management',
-              city: payload.metadata.city || 'Austin',
-              state: payload.metadata.state || 'TX',
-              deductions: payload.deductions,
-              leaseExcerpt: payload.leaseTextExcerpt,
-            }),
+            body: researchBody,
           }).then((res) => (res.ok ? res.json() : null)).catch(() => null)
         : Promise.resolve(null);
 

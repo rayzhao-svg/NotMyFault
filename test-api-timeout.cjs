@@ -112,10 +112,10 @@ function fakeTimers() {
   for (const request of services.calls) {
     assert.equal(request.config.abortSignal, controller.signal);
     assert.equal(request.config.httpOptions.timeout, 150_000);
-    assert.equal(request.config.httpOptions.retryOptions.attempts, 1);
+    assert.equal(request.config.httpOptions.retryOptions.attempts, 3);
     assert.equal(request.config.responseMimeType, 'application/json');
   }
-  console.log('PASS both real services pass the deadline signal and single-attempt SDK timeout.');
+  console.log('PASS both real services pass the deadline signal and bounded SDK retries and timeout.');
 
   for (const [kind, payload, code] of [
     ['analyze', photoPayload, 'ANALYSIS_TIMEOUT'],

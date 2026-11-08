@@ -195,7 +195,7 @@ Evaluate the evidence thoroughly and output valid JSON.`;
         abortSignal,
         httpOptions: {
           timeout: GEMINI_TIMEOUT_MS,
-          retryOptions: { attempts: 1 },
+          retryOptions: { attempts: 3 },
         },
       },
     });

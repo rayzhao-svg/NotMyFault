@@ -131,7 +131,7 @@ Output strictly valid JSON according to schema.`;
         abortSignal,
         httpOptions: {
           timeout: GEMINI_TIMEOUT_MS,
-          retryOptions: { attempts: 1 },
+          retryOptions: { attempts: 3 },
         },
       },
     });

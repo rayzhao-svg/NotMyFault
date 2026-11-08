@@ -28,38 +28,38 @@ export const SAMPLE_DEDUCTIONS: LandlordDeduction[] = [
 export const SAMPLE_FINDINGS: VisualFinding[] = [
   {
     id: 'finding-wall-scuff',
-    damageDescription: 'Friction scuff mark on lower drywall (~4 inches above baseboard)',
-    location: 'Living room south wall, 12 inches to the left of duplex electrical outlet',
+    damageDescription: 'Charcoal scuff on the lower wall above the baseboard',
+    location: 'Lower living room wall, left of the electrical outlet',
     moveInObservation:
-      'Clear, 4.5-inch diagonal charcoal scuff mark and surface abrasion is visible on the beige drywall in the Move-In photograph (dated 2024-06-01).',
+      'A short diagonal charcoal scuff is visible low on the beige wall, above the baseboard and left of the electrical outlet.',
     moveOutObservation:
-      'The identical 4.5-inch diagonal scuff mark is present at the exact same spatial coordinates relative to the baseboard and outlet in the Move-Out photograph (dated 2025-05-31). No new plaster punctures or expansion observed.',
+      'The same low-wall charcoal scuff remains in the matching position relative to the baseboard and outlet, without an evident increase in size.',
     classification: 'preexisting',
     confidence: 'high',
     evidenceExplanation:
       'Comparative visual evidence confirms this specific scuff existed prior to tenant occupancy. Under standard lease wear & tear rules, tenants cannot be billed for preexisting cosmetic blemishes.',
     associatedChargeIds: ['charge-wall-350'],
     moveInBox: {
-      ymin: 545,
-      xmin: 290,
-      ymax: 640,
-      xmax: 380,
+      ymin: 625,
+      xmin: 300,
+      ymax: 675,
+      xmax: 365,
     },
     moveOutBox: {
-      ymin: 545,
-      xmin: 290,
-      ymax: 640,
-      xmax: 380,
+      ymin: 625,
+      xmin: 300,
+      ymax: 675,
+      xmax: 365,
     },
   },
   {
     id: 'finding-carpet-stain',
-    damageDescription: 'Dark circular liquid discoloration / spill spot on carpet fibers',
-    location: 'Foreground carpet, ~3 feet from baseboard edge',
+    damageDescription: 'Irregular brown spill stain on the foreground carpet',
+    location: 'Foreground carpet, right of center',
     moveInObservation:
-      'Carpet in Move-In photograph shows uniform fibers and consistent neutral beige tone with no visible discoloration in this zone.',
+      'The foreground carpet has a consistent beige tone, with no brown spill stain in the highlighted move-out area.',
     moveOutObservation:
-      'Noticeable dark brown organic discoloration (~8 inches diameter) with splatter droplets appears in the foreground carpet.',
+      'An irregular dark brown spill stain with smaller surrounding spots appears on the foreground carpet.',
     classification: 'new',
     confidence: 'high',
     evidenceExplanation:
@@ -67,10 +67,10 @@ export const SAMPLE_FINDINGS: VisualFinding[] = [
     associatedChargeIds: ['charge-carpet-250'],
     moveInBox: null,
     moveOutBox: {
-      ymin: 760,
-      xmin: 560,
-      ymax: 910,
-      xmax: 730,
+      ymin: 798,
+      xmin: 575,
+      ymax: 900,
+      xmax: 715,
     },
   },
 ];
@@ -230,7 +230,7 @@ export const SAMPLE_POLICY_COMPARISONS: PolicyComparisonItem[] = [
       url: 'https://lonestarhandyman.example.com/rates',
     },
     photographicEvidence:
-      'Identical 4.5-inch scuff clearly visible on Move-In photo (2024-06-01) at matching coordinates.',
+      'The same low-wall scuff is visible above the baseboard and left of the outlet in both sample photos.',
     aiAssessment:
       'Dispute is strongly supported. The blemish was documented prior to occupancy, falls under the company published normal wear policy, and the $350 fee exceeds local spot repair market rates by 150%.',
     disputablePotential: 'high',
@@ -268,7 +268,7 @@ export function getSampleAnalysisResult(): AnalysisResult {
     id: 'sample-case-austin-3b',
     comparable: true,
     roomComparisonNotes:
-      'Both photos capture the identical living room angle, confirmed by matching wall corner geometry, ceiling trim, right-hand window frame, and duplex electrical outlet location.',
+      'Matching wall geometry, baseboard, and electrical outlet positions establish the same sample scene. The low-wall scuff is present in both generated photos; the foreground carpet spill appears only in the move-out example.',
     findings,
     deductions,
     financialTotals,
@@ -289,7 +289,7 @@ export function getSampleAnalysisResult(): AnalysisResult {
       analyzedAt: new Date().toISOString(),
       isSyntheticDemo: true,
     },
-    moveInImageUrl: '/sample-move-in.svg',
-    moveOutImageUrl: '/sample-move-out.svg',
+    moveInImageUrl: '/sample-move-in.jpg',
+    moveOutImageUrl: '/sample-move-out.jpg',
   };
 }

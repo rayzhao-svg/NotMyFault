@@ -84,7 +84,7 @@ export const ResultsDashboard: React.FC<ResultsDashboardProps> = ({
               Demonstration Mode (Synthetic Austin Case)
             </p>
             <p className="mt-1 text-amber-900">
-              You are inspecting synthetic room evidence. The living room wall scuff was present at Move-In (
+              You are viewing AI-generated demo photos and simulated findings. The living room wall scuff is present in both photos (
               <strong className="font-semibold">$350 wall repaint disputable</strong>), while carpet stains appeared after move-in (
               <strong className="font-semibold">$250 carpet review</strong>). Landlord policy citations and Austin market repair quotes are fully simulated.
             </p>

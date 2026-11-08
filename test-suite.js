@@ -6,21 +6,17 @@ console.log('======================================================');
 console.log('       NotMyFault Comprehensive Test Suite');
 console.log('======================================================\n');
 
-// 1. Verify Sample SVG files exist and have forensic content
-console.log('--- 1. Testing Sample SVGs ---');
-const moveInPath = path.join(__dirname, 'public', 'sample-move-in.svg');
-const moveOutPath = path.join(__dirname, 'public', 'sample-move-out.svg');
-
-assert.strictEqual(fs.existsSync(moveInPath), true, 'sample-move-in.svg must exist in public folder');
-assert.strictEqual(fs.existsSync(moveOutPath), true, 'sample-move-out.svg must exist in public folder');
-
-const moveInSvg = fs.readFileSync(moveInPath, 'utf8');
-const moveOutSvg = fs.readFileSync(moveOutPath, 'utf8');
-
-assert.ok(moveInSvg.includes('preexisting-wall-scuff'), 'Move-in SVG must contain preexisting scuff evidence');
-assert.ok(moveOutSvg.includes('preexisting-wall-scuff-moveout'), 'Move-out SVG must contain matching preexisting scuff evidence');
-assert.ok(moveOutSvg.includes('new-carpet-stain'), 'Move-out SVG must contain new carpet stain evidence');
-console.log('✓ Sample SVGs are verified visual exhibits with matching coordinates.');
+// 1. Verify sample JPEG files are readable and have valid JPEG markers.
+console.log('--- 1. Testing Sample Photos ---');
+for (const filename of ['sample-move-in.jpg', 'sample-move-out.jpg']) {
+  const imagePath = path.join(__dirname, 'public', filename);
+  assert.ok(fs.existsSync(imagePath), `${filename} must exist in public folder`);
+  const image = fs.readFileSync(imagePath);
+  assert.ok(image.length > 4, `${filename} must be readable and non-empty`);
+  assert.ok(image.subarray(0, 3).equals(Buffer.from([0xff, 0xd8, 0xff])), `${filename} must have a JPEG header`);
+  assert.ok(image.subarray(-2).equals(Buffer.from([0xff, 0xd9])), `${filename} must have a JPEG end marker`);
+}
+console.log('✓ Sample demonstration JPEG photos are present and readable.');
 
 // 2. Test Deterministic Financial Calculation Logic
 console.log('\n--- 2. Testing Deterministic Financial Calculations ---');
@@ -35,7 +31,7 @@ const sampleFindings = [
     id: 'f-1',
     classification: 'preexisting',
     associatedChargeIds: ['charge-wall-350'],
-    evidenceExplanation: '4.5-inch scuff existed at move-in.'
+    evidenceExplanation: 'Low-wall scuff existed at move-in.'
   },
   {
     id: 'f-2',

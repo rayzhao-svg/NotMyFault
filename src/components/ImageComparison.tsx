@@ -22,6 +22,7 @@ interface ImageComparisonProps {
   onSelectFinding: (findingId: string | null) => void;
   roomComparisonNotes?: string;
   isComparable?: boolean;
+  isSyntheticDemo?: boolean;
 }
 
 export const ImageComparison: React.FC<ImageComparisonProps> = ({
@@ -34,6 +35,7 @@ export const ImageComparison: React.FC<ImageComparisonProps> = ({
   onSelectFinding,
   roomComparisonNotes,
   isComparable = true,
+  isSyntheticDemo = false,
 }) => {
   const [showBoxes, setShowBoxes] = useState<boolean>(true);
   const [hoveredFindingId, setHoveredFindingId] = useState<string | null>(null);
@@ -128,14 +130,19 @@ export const ImageComparison: React.FC<ImageComparisonProps> = ({
       {/* Header and Controls */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-200 gap-4">
         <div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <h3 className="text-lg font-bold text-slate-900 font-serif">
               Visual Evidence Inspector
             </h3>
+            {isSyntheticDemo && (
+              <span className="rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-semibold text-amber-900">
+                AI-generated demo photos
+              </span>
+            )}
             {isComparable ? (
               <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-semibold text-emerald-800">
                 <CheckCircle className="h-3 w-3" />
-                Verified Matching Room
+                {isSyntheticDemo ? 'Matching Sample Room' : 'Verified Matching Room'}
               </span>
             ) : (
               <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-semibold text-amber-800">
@@ -175,7 +182,9 @@ export const ImageComparison: React.FC<ImageComparisonProps> = ({
         <div className="mt-4 rounded-xl bg-slate-50 border border-slate-200 p-3 text-xs text-slate-700 flex items-start gap-2.5">
           <Layers className="h-4 w-4 text-teal-600 flex-shrink-0 mt-0.5" />
           <p>
-            <strong className="text-slate-900 font-semibold">Forensic Room Landmark Check: </strong>
+            <strong className="text-slate-900 font-semibold">
+              {isSyntheticDemo ? 'Sample Scene Comparison: ' : 'Forensic Room Landmark Check: '}
+            </strong>
             {roomComparisonNotes}
           </p>
         </div>
@@ -192,12 +201,12 @@ export const ImageComparison: React.FC<ImageComparisonProps> = ({
             <span className="text-[11px] text-slate-500">Initial condition</span>
           </div>
 
-          <div className="relative rounded-xl border border-slate-300 overflow-hidden bg-slate-900 aspect-[4/3] flex items-center justify-center">
+          <div className="relative rounded-xl border border-slate-300 overflow-hidden bg-slate-900">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={moveInUrl}
               alt="Move-In Baseline Photo"
-              className="w-full h-full object-contain select-none"
+              className="block w-full h-auto select-none"
             />
 
             {/* Bounding box layer */}
@@ -223,12 +232,12 @@ export const ImageComparison: React.FC<ImageComparisonProps> = ({
             <span className="text-[11px] text-slate-500">End-of-lease checkout</span>
           </div>
 
-          <div className="relative rounded-xl border border-slate-300 overflow-hidden bg-slate-900 aspect-[4/3] flex items-center justify-center">
+          <div className="relative rounded-xl border border-slate-300 overflow-hidden bg-slate-900">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={moveOutUrl}
               alt="Move-Out Inspection Photo"
-              className="w-full h-full object-contain select-none"
+              className="block w-full h-auto select-none"
             />
 
             {/* Bounding box layer */}

@@ -281,8 +281,8 @@ export default function Home() {
 
                 {/* Side-by-Side Image Inspector with Normalized Bounding Box Support */}
                 <ImageComparison
-                  moveInUrl={analysisResult.moveInImageUrl || '/sample-move-in.svg'}
-                  moveOutUrl={analysisResult.moveOutImageUrl || '/sample-move-out.svg'}
+                  moveInUrl={analysisResult.moveInImageUrl || '/sample-move-in.jpg'}
+                  moveOutUrl={analysisResult.moveOutImageUrl || '/sample-move-out.jpg'}
                   moveInDate={analysisResult.metadata.moveInDate || '2024-06-01'}
                   moveOutDate={analysisResult.metadata.moveOutDate || '2025-05-31'}
                   findings={analysisResult.findings}
@@ -290,6 +290,7 @@ export default function Home() {
                   onSelectFinding={setSelectedFindingId}
                   roomComparisonNotes={analysisResult.roomComparisonNotes}
                   isComparable={analysisResult.comparable}
+                  isSyntheticDemo={analysisResult.metadata.isSyntheticDemo}
                 />
 
                 {/* Financial & Itemized Audit Dashboard + Policy Research + Repair Quotes */}

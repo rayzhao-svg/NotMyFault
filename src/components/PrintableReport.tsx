@@ -71,7 +71,7 @@ export const PrintableReport: React.FC<PrintableReportProps> = ({ result, onClos
                   NOTMY<span className="text-teal-700">FAULT</span>
                 </span>
                 <span className="text-xs uppercase tracking-widest bg-slate-100 px-2 py-0.5 rounded font-mono font-bold text-slate-700">
-                  OFFICIAL EVIDENCE AUDIT
+                  {meta.isSyntheticDemo ? 'DEMO EVIDENCE AUDIT' : 'OFFICIAL EVIDENCE AUDIT'}
                 </span>
               </div>
               <p className="text-xs text-slate-500 mt-1 uppercase tracking-wider font-semibold">
@@ -83,7 +83,7 @@ export const PrintableReport: React.FC<PrintableReportProps> = ({ result, onClos
               <p>Dossier Ref: <strong className="text-slate-900 font-bold">NMF-{Date.now().toString().slice(-6)}</strong></p>
               <p>Generated: {new Date(meta.analyzedAt || Date.now()).toLocaleDateString()}</p>
               {meta.isSyntheticDemo && (
-                <p className="text-amber-700 font-semibold mt-0.5">DEMO / SYNTHETIC CASE</p>
+                <p className="text-amber-700 font-semibold mt-0.5">DEMO / AI-GENERATED PHOTOS</p>
               )}
             </div>
           </div>
@@ -141,18 +141,18 @@ export const PrintableReport: React.FC<PrintableReportProps> = ({ result, onClos
           {result.moveInImageUrl && result.moveOutImageUrl && (
             <div className="space-y-3 page-break-inside-avoid">
               <h3 className="text-sm font-bold uppercase tracking-wider text-slate-900 border-b border-slate-200 pb-1">
-                Visual Inspection Photographic Comparison
+                {meta.isSyntheticDemo ? 'AI-Generated Demo Photo Comparison' : 'Visual Inspection Photographic Comparison'}
               </h3>
               <div className="grid grid-cols-2 gap-4">
                 <div className="border border-slate-300 rounded-lg p-2 bg-slate-50 text-center">
                   <span className="text-[11px] font-bold text-sky-800 block mb-1 uppercase">Move-In Baseline Photo</span>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={result.moveInImageUrl} alt="Move-In Baseline" className="w-full h-44 object-cover rounded border border-slate-200" />
+                  <img src={result.moveInImageUrl} alt="Move-In Baseline" className="block w-full h-auto rounded border border-slate-200" />
                 </div>
                 <div className="border border-slate-300 rounded-lg p-2 bg-slate-50 text-center">
                   <span className="text-[11px] font-bold text-emerald-800 block mb-1 uppercase">Move-Out Inspection Photo</span>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={result.moveOutImageUrl} alt="Move-Out Inspection" className="w-full h-44 object-cover rounded border border-slate-200" />
+                  <img src={result.moveOutImageUrl} alt="Move-Out Inspection" className="block w-full h-auto rounded border border-slate-200" />
                 </div>
               </div>
             </div>

@@ -194,7 +194,7 @@ export const ImageComparison: React.FC<ImageComparisonProps> = ({
       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Move-In Image Container */}
         <div className="flex flex-col">
-          <div className="flex items-center justify-between mb-2">
+          <div className="flex min-h-10 items-center justify-between gap-2 mb-2">
             <span className="text-xs font-bold uppercase tracking-wider text-sky-700 bg-sky-50 px-2 py-0.5 rounded border border-sky-200">
               Move-In Baseline ({moveInDate})
             </span>
@@ -225,7 +225,7 @@ export const ImageComparison: React.FC<ImageComparisonProps> = ({
 
         {/* Move-Out Image Container */}
         <div className="flex flex-col">
-          <div className="flex items-center justify-between mb-2">
+          <div className="flex min-h-10 items-center justify-between gap-2 mb-2">
             <span className="text-xs font-bold uppercase tracking-wider text-rose-700 bg-rose-50 px-2 py-0.5 rounded border border-rose-200">
               Move-Out Inspection ({moveOutDate})
             </span>

@@ -1,5 +1,6 @@
 import { GoogleGenAI } from '@google/genai';
 import { getGeminiModel } from './geminiConfig';
+import { GEMINI_TIMEOUT_MS } from './geminiDeadline';
 import {
   LandlordDeduction,
   ResearchSource,
@@ -25,7 +26,8 @@ export interface ResearchResult {
 }
 
 export async function researchPolicyAndPricing(
-  payload: ResearchRequestPayload
+  payload: ResearchRequestPayload,
+  abortSignal?: AbortSignal
 ): Promise<ResearchResult> {
   const apiKey = process.env.GEMINI_API_KEY?.trim();
   if (!apiKey) {
@@ -126,6 +128,11 @@ Output strictly valid JSON according to schema.`;
       ],
       config: {
         responseMimeType: 'application/json',
+        abortSignal,
+        httpOptions: {
+          timeout: GEMINI_TIMEOUT_MS,
+          retryOptions: { attempts: 1 },
+        },
       },
     });
 

@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { researchPolicyAndPricing, ResearchRequestPayload } from '../../../lib/research';
+import { GeminiTimeoutError, withGeminiDeadline } from '../../../lib/geminiDeadline';
 
 export const dynamic = 'force-dynamic';
-export const maxDuration = 60;
+export const maxDuration = 180;
 
 export async function POST(req: NextRequest) {
   try {
@@ -37,9 +38,19 @@ export async function POST(req: NextRequest) {
       leaseExcerpt: body.leaseExcerpt?.trim(),
     };
 
-    const results = await researchPolicyAndPricing(payload);
+    const results = await withGeminiDeadline((signal) => researchPolicyAndPricing(payload, signal));
     return NextResponse.json(results, { status: 200 });
   } catch (err: unknown) {
+    if (err instanceof GeminiTimeoutError) {
+      return NextResponse.json(
+        {
+          error: 'RESEARCH_TIMEOUT',
+          message: 'Policy research took too long. Please try again without live research, or use "Try Sample Case".',
+        },
+        { status: 504 }
+      );
+    }
+
     const errorMsg = err instanceof Error ? err.message : String(err);
     return NextResponse.json(
       {

@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { analyzeEvidenceWithGemini, AnalyzeRequestPayload } from '../../../lib/gemini';
+import { GeminiTimeoutError, withGeminiDeadline } from '../../../lib/geminiDeadline';
 
 export const dynamic = 'force-dynamic';
-export const maxDuration = 60;
+export const maxDuration = 180;
 
 export async function POST(req: NextRequest) {
   try {
@@ -67,10 +68,20 @@ export async function POST(req: NextRequest) {
       metadata: body.metadata || {},
     };
 
-    const analysisResult = await analyzeEvidenceWithGemini(payload);
+    const analysisResult = await withGeminiDeadline((signal) => analyzeEvidenceWithGemini(payload, signal));
 
     return NextResponse.json(analysisResult, { status: 200 });
   } catch (err: unknown) {
+    if (err instanceof GeminiTimeoutError) {
+      return NextResponse.json(
+        {
+          error: 'ANALYSIS_TIMEOUT',
+          message: 'Photo analysis took too long. Please try again, or use "Try Sample Case".',
+        },
+        { status: 504 }
+      );
+    }
+
     const errorMsg = err instanceof Error ? err.message : String(err);
 
     if (errorMsg.includes('MISSING_API_KEY')) {

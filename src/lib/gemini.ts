@@ -1,5 +1,6 @@
 import { GoogleGenAI } from '@google/genai';
 import { getGeminiModel } from './geminiConfig';
+import { GEMINI_TIMEOUT_MS } from './geminiDeadline';
 import {
   AnalysisResult,
   LandlordDeduction,
@@ -99,7 +100,8 @@ function normalizeClassification(val?: string): DamageClassification {
 }
 
 export async function analyzeEvidenceWithGemini(
-  payload: AnalyzeRequestPayload
+  payload: AnalyzeRequestPayload,
+  abortSignal?: AbortSignal
 ): Promise<AnalysisResult> {
   const apiKey = process.env.GEMINI_API_KEY?.trim();
   if (!apiKey) {
@@ -190,6 +192,11 @@ Evaluate the evidence thoroughly and output valid JSON.`;
       ],
       config: {
         responseMimeType: 'application/json',
+        abortSignal,
+        httpOptions: {
+          timeout: GEMINI_TIMEOUT_MS,
+          retryOptions: { attempts: 1 },
+        },
       },
     });
 

@@ -21,6 +21,8 @@ import {
 import { getSampleAnalysisResult } from '../lib/sampleData';
 import { getCurrentUser, signOutUser, saveDisputeCase } from '../lib/supabase';
 import { prepareAnalysisImage, serializeApiRequest } from '../lib/uploadImages';
+import { readApiJson, isAnalysisResponse, isResearchResponse } from '../lib/apiResponse';
+import type { ResearchResult } from '../lib/research';
 import { RefreshCw, Scale } from 'lucide-react';
 
 export default function Home() {
@@ -109,7 +111,7 @@ export default function Home() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: photoBody,
-      });
+      }).then((response) => readApiJson<AnalysisResult>(response, 'Photo analysis', isAnalysisResponse));
 
       // 2. Concurrently run policy & pricing research if requested
       const researchPromise = payload.runResearch
@@ -117,15 +119,10 @@ export default function Home() {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: researchBody,
-          }).then((res) => (res.ok ? res.json() : null)).catch(() => null)
+          }).then((response) => readApiJson<ResearchResult>(response, 'Policy research', isResearchResponse)).catch(() => null)
         : Promise.resolve(null);
 
-      const [photoRes, researchData] = await Promise.all([photoPromise, researchPromise]);
-
-      const photoData = await photoRes.json();
-      if (!photoRes.ok) {
-        throw new Error(photoData.message || photoData.error || 'Failed to analyze photos');
-      }
+      const [photoData, researchData] = await Promise.all([photoPromise, researchPromise]);
 
       // Attach client-side image URLs for visual display and research findings
       const resultWithExtras: AnalysisResult = {

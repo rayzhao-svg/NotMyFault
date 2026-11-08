@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="wallGradOut" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8E2D8"/>
+      <stop offset="100%" stop-color="#DAD2C5"/>
+    </linearGradient>
+    <linearGradient id="floorGradOut" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#A59B8B"/>
+      <stop offset="100%" stop-color="#8E8373"/>
+    </linearGradient>
+    <filter id="softBlurOut">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+    <radialGradient id="stainGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3D291C" stop-opacity="0.85"/>
+      <stop offset="60%" stop-color="#543A27" stop-opacity="0.7"/>
+      <stop offset="85%" stop-color="#6E4D34" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#8E8373" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background Wall (Identical perspective and color) -->
+  <rect x="0" y="0" width="800" height="420" fill="url(#wallGradOut)"/>
+
+  <!-- Left Wall Perspective / Corner -->
+  <polygon points="0,0 120,40 120,420 0,440" fill="#CEC5B6"/>
+  <line x1="120" y1="40" x2="120" y2="420" stroke="#B8AD9B" stroke-width="2"/>
+
+  <!-- Ceiling Trim -->
+  <rect x="120" y="38" width="680" height="12" fill="#F4F0E8"/>
+  <line x1="120" y1="50" x2="800" y2="50" stroke="#D3CBC0" stroke-width="1.5"/>
+
+  <!-- Window Frame on Right Wall -->
+  <rect x="520" y="70" width="180" height="240" rx="4" fill="#F8F6F0" stroke="#C4BCAD" stroke-width="5"/>
+  <rect x="532" y="82" width="74" height="104" fill="#CDE1EB" opacity="0.85"/>
+  <rect x="614" y="82" width="74" height="104" fill="#CDE1EB" opacity="0.85"/>
+  <rect x="532" y="194" width="74" height="104" fill="#C2D8E4" opacity="0.85"/>
+  <rect x="614" y="194" width="74" height="104" fill="#C2D8E4" opacity="0.85"/>
+  <!-- Sunlight cast onto wall -->
+  <polygon points="520,310 700,310 760,420 480,420" fill="#FFF9EB" opacity="0.25"/>
+
+  <!-- Baseboard Trim -->
+  <rect x="120" y="395" width="680" height="25" fill="#FAF7F2" stroke="#D5CEC2" stroke-width="1.5"/>
+  <rect x="120" y="416" width="680" height="4" fill="#E2DBD0"/>
+  <!-- Left Baseboard Trim -->
+  <polygon points="0,425 120,395 120,420 0,440" fill="#EFEAE0"/>
+
+  <!-- Floor Carpet -->
+  <polygon points="0,440 120,420 800,420 800,600 0,600" fill="url(#floorGradOut)"/>
+  <path d="M0,480 Q400,470 800,480" stroke="#9B9080" stroke-width="0.8" opacity="0.4" fill="none"/>
+  <path d="M0,530 Q400,520 800,530" stroke="#9B9080" stroke-width="0.8" opacity="0.4" fill="none"/>
+
+  <!-- Electrical Duplex Outlet (Identical landmark on wall) -->
+  <rect x="360" y="330" width="34" height="52" rx="3" fill="#FAF8F5" stroke="#BBB2A2" stroke-width="1.5"/>
+  <rect x="371" y="340" width="12" height="14" rx="2" fill="#E8E2D5"/>
+  <circle cx="377" cy="344" r="1.5" fill="#555"/>
+  <circle cx="377" cy="350" r="1.5" fill="#555"/>
+  <rect x="371" y="360" width="12" height="14" rx="2" fill="#E8E2D5"/>
+  <circle cx="377" cy="364" r="1.5" fill="#555"/>
+  <circle cx="377" cy="370" r="1.5" fill="#555"/>
+
+  <!-- KEY VISUAL EVIDENCE 1: PRE-EXISTING WALL SCUFF MARK (IDENTICAL POSITION & SHAPE) -->
+  <g id="preexisting-wall-scuff-moveout">
+    <path d="M 245 352 Q 255 348 268 358 T 282 362" stroke="#5A524A" stroke-width="4.5" stroke-linecap="round" fill="none" opacity="0.85"/>
+    <path d="M 248 356 Q 260 354 274 366" stroke="#48423B" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.9"/>
+    <path d="M 252 350 Q 258 346 265 353" stroke="#6C635B" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.75"/>
+    <ellipse cx="264" cy="358" rx="16" ry="6" fill="#756D65" opacity="0.35" filter="url(#softBlurOut)"/>
+  </g>
+
+  <!-- KEY VISUAL EVIDENCE 2: NEW CARPET STAIN AT MOVE-OUT -->
+  <!-- Located at coordinates: x=460..560, y=470..530 (Foreground carpet) -->
+  <g id="new-carpet-stain">
+    <!-- Outer diffuse ring -->
+    <ellipse cx="510" cy="500" rx="48" ry="24" fill="url(#stainGrad)"/>
+    <!-- Darker core spill droplet rings -->
+    <path d="M 485 498 Q 505 488 530 496 Q 545 504 525 512 Q 498 514 485 498 Z" fill="#3D291C" opacity="0.6" filter="url(#softBlurOut)"/>
+    <!-- Secondary small splash splatter -->
+    <circle cx="552" cy="486" r="4.5" fill="#4A3323" opacity="0.7"/>
+    <circle cx="562" cy="494" r="3" fill="#4A3323" opacity="0.6"/>
+  </g>
+
+  <!-- Photo Timestamp / Overlay Watermark -->
+  <rect x="20" y="20" width="220" height="34" rx="6" fill="#1E293B" opacity="0.85"/>
+  <text x="32" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#F43F5E">MOVE-OUT EVIDENCE</text>
+  <text x="160" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#E2E8F0">2025-05-31</text>
+</svg>

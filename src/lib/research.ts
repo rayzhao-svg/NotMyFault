@@ -1,4 +1,5 @@
 import { GoogleGenAI } from '@google/genai';
+import { getGeminiModel } from './geminiConfig';
 import {
   LandlordDeduction,
   ResearchSource,
@@ -32,7 +33,7 @@ export async function researchPolicyAndPricing(
   }
 
   const ai = new GoogleGenAI({ apiKey });
-  const modelName = process.env.GEMINI_MODEL?.trim() || 'gemini-2.5-flash';
+  const modelName = getGeminiModel();
 
   const chargesList = payload.deductions
     .map((d) => `Charge ID: "${d.id}" | Description: "${d.description}" | Landlord Billed: $${d.amount}`)
